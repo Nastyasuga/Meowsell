@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,5 +60,9 @@ public class UserService {
             }
         }
         userRepository.save(user);
+    }
+    public User getUserByPrincipal(Principal principal){
+        if (principal==null) return new User();
+        return userRepository.findByEmail(principal.getName());
     }
 }
