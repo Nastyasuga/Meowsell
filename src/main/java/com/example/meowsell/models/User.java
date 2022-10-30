@@ -4,6 +4,7 @@ import com.example.meowsell.models.enums.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -45,6 +46,8 @@ public class User implements UserDetails {
     private void init() {
         dateOfCreated = LocalDateTime.now();
     }
+    //security
+    public boolean isAdmin(){return roles.contains(Role.ROLE_ADMIN); }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
